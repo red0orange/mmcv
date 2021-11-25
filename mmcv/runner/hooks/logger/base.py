@@ -8,7 +8,7 @@ import torch
 from ..hook import Hook
 
 
-class LoggerHook(Hook):
+class LoggerHook(Hook):  # @note LoggerHook
     """Base class for logger hooks.
 
     Args:

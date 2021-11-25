@@ -266,9 +266,9 @@ class EvalHook(Hook):
         if self.by_epoch and self._should_evaluate(runner):
             self._do_evaluate(runner)
 
-    def _do_evaluate(self, runner):
+    def _do_evaluate(self, runner):  # @note EvalHook评估的函数
         """perform evaluation and save ckpt."""
-        results = self.test_fn(runner.model, self.dataloader)
+        results = self.test_fn(runner.model, self.dataloader)  # 真正使用val_dataloader进行评估的函数
         runner.log_buffer.output['eval_iter_num'] = len(self.dataloader)
         key_score = self.evaluate(runner, results)
         # the key_score may be `None` so it needs to skip the action to save
@@ -329,7 +329,7 @@ class EvalHook(Hook):
             'best_score', self.init_value_map[self.rule])
         if self.compare_func(key_score, best_score):
             best_score = key_score
-            runner.meta['hook_msgs']['best_score'] = best_score
+            runner.meta['hook_msgs']['best_score'] = best_score  # @note 保存信息到runner
 
             if self.best_ckpt_path and self.file_client.isfile(
                     self.best_ckpt_path):
@@ -358,7 +358,7 @@ class EvalHook(Hook):
             runner (:obj:`mmcv.Runner`): The underlined training runner.
             results (list): Output results.
         """
-        eval_res = self.dataloader.dataset.evaluate(
+        eval_res = self.dataloader.dataset.evaluate(  # @note 实际调用的是dataset中的评估函数
             results, logger=runner.logger, **self.eval_kwargs)
 
         for name, val in eval_res.items():

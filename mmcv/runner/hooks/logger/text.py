@@ -15,7 +15,7 @@ from .base import LoggerHook
 
 
 @HOOKS.register_module()
-class TextLoggerHook(LoggerHook):
+class TextLoggerHook(LoggerHook):  # @note TextLoggerHook
     """Logger hook in text.
 
     In this logger hook, the information will be printed on terminal and

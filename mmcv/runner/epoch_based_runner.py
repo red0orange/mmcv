@@ -15,7 +15,7 @@ from .utils import get_host_info
 
 
 @RUNNERS.register_module()
-class EpochBasedRunner(BaseRunner):
+class EpochBasedRunner(BaseRunner):  # @note epoch base runner
     """Epoch-based Runner.
 
     This runner train models epoch by epoch.

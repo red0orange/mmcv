@@ -458,7 +458,7 @@ class BaseRunner(metaclass=ABCMeta):
             hook = checkpoint_config
         self.register_hook(hook, priority='NORMAL')
 
-    def register_logger_hooks(self, log_config):
+    def register_logger_hooks(self, log_config):  # @note register logger hooks
         if log_config is None:
             return
         log_interval = log_config['interval']
@@ -500,7 +500,7 @@ class BaseRunner(metaclass=ABCMeta):
             hook = profiler_config
         self.register_hook(hook)
 
-    def register_training_hooks(self,
+    def register_training_hooks(self,  # @note register training hooks
                                 lr_config,
                                 optimizer_config=None,
                                 checkpoint_config=None,
